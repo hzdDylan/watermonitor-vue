@@ -1,0 +1,16 @@
+{
+    "record": [
+        {
+            "temperature":"25.0°C",
+            "EC":"0.44ms/cm",
+            "PH":"14.00",
+            "Turbidity":"76.66"
+        },
+        {
+            "temperature":"25.0°C",
+            "EC":"0.47ms/cm",
+            "PH":"14.00",
+            "Turbidity":"79.00"
+        }
+    ]
+}
