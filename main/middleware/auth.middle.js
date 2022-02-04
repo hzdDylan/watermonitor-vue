@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken')
 // 导入秘钥
 const {JWT_SECRET} = require('../config/config.default')
 // 导入错误常量
-const {tokenExpiredError, invalidTokenError} = require('../constant/errortype')
+const {tokenExpiredError, invalidTokenError, hasnAdminPermissionError} = require('../constant/errortype')
 
 // authorize
 const authValidator = async (ctx, next) => {
-    const {authorization} = ctx.request.header;
+    const {authorization = ""} = ctx.request.header;
     // 此处Bearer后面要个空格
     const token = authorization.replace("Bearer ", '')
 
@@ -29,6 +29,18 @@ const authValidator = async (ctx, next) => {
     await next()
 }
 
+// 水质数据的权限
+const hasWaterDataPermission = async (ctx, next) => {
+    const {is_admin} = ctx.state.user;
+    if(!is_admin) {
+        console.error('非管理员权限用户尝试修改水质数据', ctx.state.user)
+        return ctx.app.emit('error', hasnAdminPermissionError, ctx)
+    }
+
+    await next()
+}
+
 module.exports = {
-    authValidator
+    authValidator,
+    hasWaterDataPermission
 }

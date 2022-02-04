@@ -9,6 +9,8 @@ const {registerValidator, loginValidator} = require('../middleware/user.middlewa
 const {authValidator} = require('../middleware/auth.middle')
 
 // 用户路由
+
+
 const router = new Router({prefix: '/users'});
  
 // router.get('/', (ctx, next) => {

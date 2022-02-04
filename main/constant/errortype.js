@@ -38,5 +38,15 @@ module.exports = {
         code: '1102',
         message: '无效token',
         result: ''
+    },
+    hasnAdminPermissionError: {
+        code: '1103',
+        message: '无管理员权限',
+        result: ''
+    },
+    pointFormatError: {
+        code: '1201',
+        message: '站点格式校验错误',
+        result: ''
     }
 }
