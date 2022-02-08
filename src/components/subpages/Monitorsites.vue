@@ -6,14 +6,19 @@
             </el-col>
             <el-col :span="2">
                 <el-button type="primary" circle @click="tableDataFilterHandle">
-                    <i class="iconfont icon-sousuo" />
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-sousuo"></use>
+                    </svg>
                 </el-button>
             </el-col>
             
 
             <el-col :span="4" :offset="12">
                 <el-button type="primary" @click="dialogFormVisible=true">
-                     添加 <i class="iconfont icon-tianjia" />
+                     添加 
+                     <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-tianjia"></use>
+                    </svg>
                 </el-button>
             </el-col>
         </el-row>

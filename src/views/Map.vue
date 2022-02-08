@@ -34,7 +34,6 @@ export default {
         customOverlayPoints(mp) {
             // 可用：颜色代码：五级黑色#303133 四级红色#F56C6C，三级橙色#E6A23C，二级蓝色#409EFF，一级绿色#67C23A
             
-            // let mouseoverTxt = "txt" + " " + parseInt(Math.random() * 1000,10) + "套" ;
             const monitoringSite = this.$store.state.monitoringSite;
             monitoringSite.forEach((item, index) => {
                 const location = new BMap.Point(item.longitude, item.latitude);
@@ -48,41 +47,29 @@ export default {
                     }
                     return "white"
                 }();
-                const mouseoverTxt = `
-                longitude: ${item.longitude}<br>
-                latitude: ${item.latitude}<br>
-                name: ${item.name}<br>
-                degree: ${item.degree}<br>
-                PH: ${item.PH}<br>
-                temperature": ${item.temperature}<br>
-                EC: ${item.EC}
+                const infoTxt = `
+                经纬度: (${item.longitude}, ${item.latitude})<br>
+                站点名: ${item.name} , 预警等级: ${item.degree}<br>
+                监测参数: <br>
+                    PH: ${item.PH}<br>
+                    temperature": ${item.temperature}<br>
+                    EC: ${item.EC}<br>
                 `;
 
-                const myCompOverlay = new ComplexCustomOverlay(location, item.degree, mouseoverTxt, color);
+                const myCompOverlay = new ComplexCustomOverlay(location, item.degree, infoTxt, color);
 
                 mp.addOverlay(myCompOverlay);
+
+                const timer = window.setInterval(() => {
+                    console.log("刷新站点数据")
+                    const infoText = infoTxt || myCompOverlay.this._infoText;
+                    const div = myCompOverlay._infoDiv;
+                    div.innerHTML = infoText;
+                    myCompOverlay._infoWindow.setContent(div);
+                }, 300000) //5分钟
             })
-
-            // var myCompOverlay1 = new ComplexCustomOverlay(new BMap.Point(126.630, 45.750), "Ⅰ",mouseoverTxt, "#67C23A");
-            // var myCompOverlay2 = new ComplexCustomOverlay(new BMap.Point(126.640, 45.750), "Ⅱ",mouseoverTxt, "#409EFF");
-            // var myCompOverlay3 = new ComplexCustomOverlay(new BMap.Point(126.650, 45.750), "Ⅲ",mouseoverTxt, "#E6A23C");
-            // var myCompOverlay4 = new ComplexCustomOverlay(new BMap.Point(126.660, 45.750), "Ⅳ",mouseoverTxt, "#F56C6C");
-            // var myCompOverlay5 = new ComplexCustomOverlay(new BMap.Point(126.670, 45.750), "Ⅴ",mouseoverTxt, "#303133");
-
-            // let myCompOverlay = [];
-            // for(let i=0; i<1; i++) {
-                
-            // }
-
-            // mp.addOverlay(myCompOverlay1);
-            // mp.addOverlay(myCompOverlay2);
-            // mp.addOverlay(myCompOverlay3);
-            // mp.addOverlay(myCompOverlay4);
-            // mp.addOverlay(myCompOverlay5);
             
         },
-
-        
     }
 }
 </script>

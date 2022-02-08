@@ -35,4 +35,12 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* iconfont阿里矢量的通用css代码 */
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>
